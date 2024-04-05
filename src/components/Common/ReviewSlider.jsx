@@ -97,7 +97,7 @@ function ReviewSlider() {
               </SwiperSlide>
             );
           })}
-          <SwiperSlide>Slide 1</SwiperSlide>
+          <SwiperSlide></SwiperSlide>
         </Swiper>
       </div>
     </div>
