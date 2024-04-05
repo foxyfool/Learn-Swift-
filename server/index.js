@@ -24,7 +24,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "https://learn-swift.vercel.app/",
+    origin: "https://learn-swift.vercel.app",
     credentials: true,
   })
 );
