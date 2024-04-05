@@ -9,12 +9,6 @@ import { useNavigate } from "react-router-dom";
 import { addToCart } from "../../../slices/cartSlice";
 import { ACCOUNT_TYPE } from "../../../utils/constants";
 
-// const CourseIncludes = [
-//   "8 hours on-demand video",
-//   "Full Lifetime access",
-//   "Access on Mobile and TV",
-//   "Certificate of completion",
-// ]
 
 function CourseDetailsCard({ course, setConfirmationModal, handleBuyCourse }) {
   const { user } = useSelector((state) => state.profile);
@@ -70,25 +64,28 @@ function CourseDetailsCard({ course, setConfirmationModal, handleBuyCourse }) {
           <div className="space-x-3 pb-4 text-3xl font-semibold">
             Rs. {CurrentPrice}
           </div>
-          <div className="flex flex-col gap-4">
-            <button
-              className="yellowButton"
-              onClick={
-                user && course?.studentsEnrolled.includes(user?._id)
-                  ? () => navigate("/dashboard/enrolled-courses")
-                  : handleBuyCourse
-              }
-            >
-              {user && course?.studentsEnrolled.includes(user?._id)
-                ? "Go To Course"
-                : "Buy Now"}
-            </button>
-            {(!user || !course?.studentsEnrolled.includes(user?._id)) && (
-              <button onClick={handleAddToCart} className="blackButton">
-                Add to Cart
-              </button>
+            {/* Conditional rendering based on account type */}
+            {user && user.accountType !== ACCOUNT_TYPE.INSTRUCTOR && (
+              <div className="flex flex-col gap-4">
+                <button
+                  className="yellowButton"
+                  onClick={
+                    user && course?.studentsEnrolled.includes(user?._id)
+                      ? () => navigate("/dashboard/enrolled-courses")
+                      : handleBuyCourse
+                  }
+                >
+                  {user && course?.studentsEnrolled.includes(user?._id)
+                    ? "Go To Course"
+                    : "Buy Now"}
+                </button>
+                {(!user || !course?.studentsEnrolled.includes(user?._id)) && (
+                  <button onClick={handleAddToCart} className="blackButton">
+                    Add to Cart
+                  </button>
+                )}
+              </div>
             )}
-          </div>
           <div>
             <p className="pb-3 pt-6 text-center text-sm text-richblack-25">
               30-Day Money-Back Guarantee
